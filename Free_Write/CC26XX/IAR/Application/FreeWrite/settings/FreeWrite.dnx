@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<settings>
+    <Stack>
+        <FillEnabled>0</FillEnabled>
+        <OverflowWarningsEnabled>1</OverflowWarningsEnabled>
+        <WarningThreshold>90</WarningThreshold>
+        <SpWarningsEnabled>1</SpWarningsEnabled>
+        <WarnLogOnly>1</WarnLogOnly>
+        <UseTrigger>1</UseTrigger>
+        <TriggerName>main</TriggerName>
+        <LimitSize>0</LimitSize>
+        <ByteLimit>50</ByteLimit>
+    </Stack>
+    <XdsDriver>
+        <xds110serialNo>L1000782</xds110serialNo>
+        <xds110foundProbes />
+        <xdsResetStyle>0</xdsResetStyle>
+        <xdsResetStrategy>3</xdsResetStrategy>
+        <CStepIntDis>_ 0</CStepIntDis>
+        <LeaveTargetRunning>_ 0</LeaveTargetRunning>
+    </XdsDriver>
+    <DebugChecksum>
+        <Checksum>1187347687</Checksum>
+    </DebugChecksum>
+    <Exceptions>
+        <StopOnUncaught>_ 0</StopOnUncaught>
+        <StopOnThrow>_ 0</StopOnThrow>
+    </Exceptions>
+    <CallStack>
+        <ShowArgs>0</ShowArgs>
+    </CallStack>
+    <Disassembly>
+        <MixedMode>1</MixedMode>
+    </Disassembly>
+    <LogFile>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+        <Category>_ 0</Category>
+    </LogFile>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
+    <CallStackLog>
+        <Enabled>0</Enabled>
+    </CallStackLog>
+    <CallStackStripe>
+        <ShowTiming>1</ShowTiming>
+    </CallStackStripe>
+    <Trace1>
+        <Enabled>0</Enabled>
+        <ShowSource>1</ShowSource>
+    </Trace1>
+    <InterruptLog>
+        <LogEnabled>0</LogEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+        <SumEnabled>0</SumEnabled>
+        <ShowTimeSum>1</ShowTimeSum>
+        <SumSortOrder>0</SumSortOrder>
+    </InterruptLog>
+    <DataLog>
+        <LogEnabled>0</LogEnabled>
+        <GraphEnabled>0</GraphEnabled>
+        <ShowTimeLog>1</ShowTimeLog>
+        <SumEnabled>0</SumEnabled>
+        <ShowTimeSum>1</ShowTimeSum>
+    </DataLog>
+    <Interrupts>
+        <Enabled>1</Enabled>
+    </Interrupts>
+    <MemConfig>
+        <Base>1</Base>
+        <Manual>0</Manual>
+        <Ddf>1</Ddf>
+        <TypeViol>0</TypeViol>
+        <Stop>1</Stop>
+    </MemConfig>
+    <Simulator>
+        <Freq>10000000</Freq>
+        <FreqHi>0</FreqHi>
+        <MultiCoreRunAll>1</MultiCoreRunAll>
+    </Simulator>
+    <DisassembleMode>
+        <mode>0</mode>
+    </DisassembleMode>
+    <Breakpoints2>
+        <Count>0</Count>
+    </Breakpoints2>
+    <Aliases>
+        <A0>_ "C:\hudson\workspace\FWGroup-DriverLib\modules\output\cc26xx_cha_2_2_ext\driverlib\adi.h" ""</A0>
+        <A1>_ "C:\hudson\workspace\FWGroup-DriverLib\modules\output\cc26xx_cha_2_2_ext\driverlib\aon_ioc.h" ""</A1>
+        <A2>_ "C:\hudson\workspace\FWGroup-DriverLib\modules\output\cc26xx_cha_2_2_ext\driverlib\aon_wuc.h" ""</A2>
+        <A3>_ "C:\hudson\workspace\FWGroup-DriverLib\modules\output\cc26xx_cha_2_2_ext\driverlib\prcm.h" ""</A3>
+        <A4>_ "C:\hudson\workspace\FWGroup-DriverLib\modules\output\cc26xx_cha_2_2_ext\driverlib\pwr_ctrl.c" ""</A4>
+        <A5>_ "C:\hudson\workspace\FWGroup-DriverLib\modules\output\cc26xx_cha_2_2_ext\driverlib\pwr_ctrl.h" ""</A5>
+        <A6>_ "C:\hudson\workspace\FWGroup-DriverLib\modules\output\cc26xx_cha_2_2_ext\driverlib\vims.c" ""</A6>
+        <Count>7</Count>
+        <SuppressDialog>0</SuppressDialog>
+    </Aliases>
+</settings>
