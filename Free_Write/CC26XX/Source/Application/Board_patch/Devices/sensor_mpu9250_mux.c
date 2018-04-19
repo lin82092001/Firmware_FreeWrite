@@ -247,7 +247,7 @@ static int16_t calZ[MPU_Count * 2] = {0};
 static uint8_t scale = MFS_16BITS;      // 16 bit resolution
 static uint8_t mode = MAG_MODE_CONT2;  // Operating mode
 
-
+static PIN_Handle hMpuPin;
 /*******************************************************************************
 * @fn          SENSOR_SELECT
 *
@@ -356,6 +356,8 @@ void I2CMUX_RESET()
 */
 void sensorBoardMpu9250PowerOn(void)
 {
+  PIN_setOutputValue(hMpuPin,Board_MPU_POWER, Board_MPU_POWER_ON);
+  delay_ms(100);
   sensorSelMpu9250Reset(MPU_Board);
 }
 
@@ -382,7 +384,8 @@ void sensorBoardMpu9250PowerOff(void)
 */
 bool sensorBoardMpu9250PowerIsOn(void)
 {
- return PIN_getOutputValue(Board_PER_POWER) == Board_PER_POWER_ON;
+  return PIN_getOutputValue(Board_MPU_POWER) == Board_MPU_POWER_ON;
+ //return PIN_getOutputValue(Board_PER_POWER) == Board_PER_POWER_ON;
 }
 
 /*******************************************************************************

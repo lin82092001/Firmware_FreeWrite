@@ -86,36 +86,51 @@ extern PIN_Config BoardGpioInitTable[];
  */
 
 /* Discrete outputs */
-#define Board_LED1                  IOID_1
+//#define Board_LED1                  IOID_1//CC2650_MODA
+#define Board_LED1                  IOID_15
+#define Board_LED2                  IOID_10
 #define Board_LED_ON                1
 #define Board_LED_OFF               0
 
 /* Discrete inputs */
-#define Board_KEY                   IOID_0
+//#define Board_KEY                   IOID_0//CC2650_MODA
+#define Board_KEY                   IOID_4
 
 
 /* I2C */
-#define Board_I2C0_SDA0             IOID_8
-#define Board_I2C0_SCL0             IOID_9
-#define Board_I2C0_SDA1             IOID_2
-#define Board_I2C0_SCL1             IOID_3
+#define Board_I2C0_SDA0             IOID_5
+#define Board_I2C0_SCL0             IOID_6
+#define Board_I2C0_SDA1             IOID_8
+#define Board_I2C0_SCL1             IOID_9
+/*#define Board_I2C0_SDA0             IOID_8//CC2650_MODA
+#define Board_I2C0_SCL0             IOID_9//CC2650_MODA
+#define Board_I2C0_SDA1             IOID_2//CC2650_MODA
+#define Board_I2C0_SCL1             IOID_3//CC2650_MODA*/
 
 /* Power control */
-#define Board_PER_POWER             IOID_4
+//#define Board_PER_POWER             IOID_4//CC2650_MODA
+#define Board_PER_POWER             IOID_20
 #define Board_PER_POWER_ON          1
 #define Board_PER_POWER_OFF         0
+
+#define Board_MPU_POWER             IOID_12
+#define Board_MPU_POWER_ON          1
+#define Board_MPU_POWER_OFF         0
    
 /* ADC */
-#define Board_POWERDet              ADC_COMPB_IN_AUXIO7
-#define Board_POWERDetDIO           IOID_7
+//#define Board_POWERDet              ADC_COMPB_IN_AUXIO7//CC2650_MODA
+//#define Board_POWERDetDIO           IOID_7//CC2650_MODA
 
 /* UART pins used by driver */
-#define Board_UART_TX               IOID_13
+#define Board_UART_TX               IOID_29
+#define Board_UART_RX               IOID_28
+//#define Board_UART_TX               IOID_13//CC2650_MODA
 //#define Board_UART_TX               IOID_10
-#define Board_UART_RX               IOID_14
+//#define Board_UART_RX               IOID_14//CC2650_MODA
 
 /* User Defined Keys */
-#define PeripheralKey1              IOID_10
+#define PeripheralKey1              IOID_17
+//#define PeripheralKey1              IOID_10//CC2650_MODA
 //#define PeripheralKey1              IOID_5
 #define PeripheralKeyPress          0
 

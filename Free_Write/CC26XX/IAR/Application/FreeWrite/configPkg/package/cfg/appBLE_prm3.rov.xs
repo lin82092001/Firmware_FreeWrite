@@ -10809,15 +10809,15 @@ __o = __obj[977]  // iar.targets.arm.M3
     __o['platform'] = String(java.net.URLDecoder.decode('ti.platforms.tiva%3ALM3S9B92%3A1', 'UTF-8'))
     __o['platforms'] = __obj[1000.0]
     __o['profiles'] = __obj[1001.0]
-    __o['rawVersion'] = String(java.net.URLDecoder.decode('8.11.2.13589', 'UTF-8'))
-    __o['rootDir'] = String(java.net.URLDecoder.decode('C%3A%2FPROGRA%7E2%2FIARSYS%7E1%2FEMBEDD%7E1.0%2Farm', 'UTF-8'))
+    __o['rawVersion'] = String(java.net.URLDecoder.decode('7.40.3.8902', 'UTF-8'))
+    __o['rootDir'] = String(java.net.URLDecoder.decode('C%3A%2FPROGRA%7E2%2FIARSYS%7E1%2FEMBEDD%7E1.2%2Farm', 'UTF-8'))
     __o['rts'] = String(java.net.URLDecoder.decode('iar.targets.arm.rts', 'UTF-8'))
     __o['sectMap'] = __obj[1014.0]
     __o['stdInclude'] = String(java.net.URLDecoder.decode('iar%2Ftargets%2Farm%2Fstd.h', 'UTF-8'))
     __o['stdTypes'] = __obj[1015.0]
     __o['suffix'] = String(java.net.URLDecoder.decode('rm3', 'UTF-8'))
     __o['vers'] = __obj[1033.0]
-    __o['version'] = String(java.net.URLDecoder.decode('iar.targets.arm.M3%7B1%2C0%2C8.11%2C2', 'UTF-8'))
+    __o['version'] = String(java.net.URLDecoder.decode('iar.targets.arm.M3%7B1%2C0%2C7.40%2C3', 'UTF-8'))
     __o['versionMap'] = __obj[1034.0]
     __o['versionRaw'] = undefined
 
@@ -10949,7 +10949,7 @@ __o = __obj[997]  // iar.targets.arm.M3/lnk
 __o = __obj[998]  // iar.targets.arm.M3/lnkOpts
     __o['$category'] = String(java.net.URLDecoder.decode('Struct', 'UTF-8'))
     __o['$name'] = String(java.net.URLDecoder.decode('iar.targets.arm.M3%2FlnkOpts', 'UTF-8'))
-    __o['prefix'] = String(java.net.URLDecoder.decode('-o+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2FDebug%2FExe%2FFreeWrite.out+--map+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2FDebug%2FList%2FFreeWrite.map+--config+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2Fcc26xx_ble_app.icf+--keep+__vector_table+-f+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2FconfigPkg%2Flinker.cmd+-f+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2F..%2F..%2FConfig%2FIAR-Boundary.xcl+--semihosting+C%3A%2Fti%2Ftirtos_simplelink_2_13_00_06%2Fproducts%2Fcc26xxware_2_21_01_15600%2Fdriverlib%2Fbin%2Fiar%2Fdriverlib.lib+--entry+__iar_program_start+--vfe+--text_out+locale+--silent', 'UTF-8'))
+    __o['prefix'] = String(java.net.URLDecoder.decode('-o+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2FDebug%2FExe%2FFreeWrite.out+--map+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2FDebug%2FList%2FFreeWrite.map+--config+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2Fcc26xx_ble_app.icf+--keep+__vector_table+-f+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2FconfigPkg%2Flinker.cmd+-f+C%3A%2Fti%2Fsimplelink%2Fble_cc26xx_2_01_01_44627%2FProjects%2Fble%2FFree_Write%2FCC26XX%2FIAR%2FApplication%2FFreeWrite%2F..%2F..%2FConfig%2FIAR-Boundary.xcl+--semihosting+C%3A%2Fti%2Ftirtos_simplelink_2_13_00_06%2Fproducts%2Fcc26xxware_2_21_01_15600%2Fdriverlib%2Fbin%2Fiar%2Fdriverlib.lib+--entry+__iar_program_start+--vfe+--silent', 'UTF-8'))
     __o['suffix'] = String(java.net.URLDecoder.decode('--map+%24%28XDCCFGDIR%29%2F%24%40.map++--redirect+_Printf%3D_PrintfSmall+--redirect+_Scanf%3D_ScanfSmall+', 'UTF-8'))
 
 __o = __obj[999]  // iar.targets.arm.M3/model

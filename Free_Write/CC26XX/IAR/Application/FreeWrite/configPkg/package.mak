@@ -89,7 +89,7 @@ C:/ti/xdctools_3_31_01_33_core/packages/xdc/tools/configuro/template/package.xs.
 package.mak: C:/ti/xdctools_3_31_01_33_core/packages/xdc/tools/configuro/template/package.xs.xdt
 endif
 
-iar.targets.arm.M3.rootDir ?= C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm
+iar.targets.arm.M3.rootDir ?= C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm
 iar.targets.arm.packageBase ?= C:/ti/tirtos_simplelink_2_13_00_06/products/bios_6_42_00_08/packages/iar/targets/arm/
 .PRECIOUS: $(XDCCFGDIR)/%.orm3
 .PHONY: all,rm3 .dlls,rm3 .executables,rm3 test,rm3
@@ -157,7 +157,7 @@ appBLE.xrm3: package/cfg/appBLE_prm3.orm3
 	$(RM) $@
 	@$(MSG) lnkrm3 $@ ...
 	$(RM) $(XDCCFGDIR)/$@.map
-	LC_ALL=C $(iar.targets.arm.M3.rootDir)/bin/ilinkarm -o C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/Debug/Exe/FreeWrite.out --map C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/Debug/List/FreeWrite.map --config C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/cc26xx_ble_app.icf --keep __vector_table -f C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/configPkg/linker.cmd -f C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/../../Config/IAR-Boundary.xcl --semihosting C:/ti/tirtos_simplelink_2_13_00_06/products/cc26xxware_2_21_01_15600/driverlib/bin/iar/driverlib.lib --entry __iar_program_start --vfe --text_out locale --silent -o $@ package/cfg/appBLE_prm3.orm3 -f package/cfg/appBLE_prm3.xdl  --semihosting=iar_breakpoint  --cpu=Cortex-M3 --map $(XDCCFGDIR)/$@.map  --redirect _Printf=_PrintfSmall --redirect _Scanf=_ScanfSmall 
+	LC_ALL=C $(iar.targets.arm.M3.rootDir)/bin/ilinkarm -o C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/Debug/Exe/FreeWrite.out --map C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/Debug/List/FreeWrite.map --config C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/cc26xx_ble_app.icf --keep __vector_table -f C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/configPkg/linker.cmd -f C:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/../../Config/IAR-Boundary.xcl --semihosting C:/ti/tirtos_simplelink_2_13_00_06/products/cc26xxware_2_21_01_15600/driverlib/bin/iar/driverlib.lib --entry __iar_program_start --vfe --silent -o $@ package/cfg/appBLE_prm3.orm3 -f package/cfg/appBLE_prm3.xdl  --semihosting=iar_breakpoint  --cpu=Cortex-M3 --map $(XDCCFGDIR)/$@.map  --redirect _Printf=_PrintfSmall --redirect _Scanf=_ScanfSmall 
 	
 
 appBLE.test test,rm3 test: appBLE.xrm3.test
