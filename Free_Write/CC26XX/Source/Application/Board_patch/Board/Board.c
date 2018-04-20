@@ -68,7 +68,7 @@ PIN_Config BoardGpioInitTable[] = {
     Board_KEY        | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_BOTHEDGES | PIN_HYSTERESIS,         /* Button is active low          */
     Board_PER_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MED,    /* Peripheral Power initially off*/
     Board_MPU_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MED,
-    /*Board_POWERDetDIO   | PIN_INPUT_DIS | PIN_GPIO_OUTPUT_DIS,*/
+    /*Board_POWERDetDIO | PIN_INPUT_DIS | PIN_GPIO_OUTPUT_DIS,*/
     PeripheralKey1   | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_BOTHEDGES | PIN_HYSTERESIS,
     PIN_TERMINATE
 };

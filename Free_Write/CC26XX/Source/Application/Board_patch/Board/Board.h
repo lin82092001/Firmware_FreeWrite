@@ -118,7 +118,8 @@ extern PIN_Config BoardGpioInitTable[];
 #define Board_MPU_POWER_OFF         0
    
 /* ADC */
-//#define Board_POWERDet              ADC_COMPB_IN_AUXIO7//CC2650_MODA
+//#define Board_POWERDet              ADC_COMPB_IN_AUXIO7
+//#define Board_POWERDetDIO           IOID_26
 //#define Board_POWERDetDIO           IOID_7//CC2650_MODA
 
 /* UART pins used by driver */

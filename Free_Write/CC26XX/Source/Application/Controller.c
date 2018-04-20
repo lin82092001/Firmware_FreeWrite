@@ -129,7 +129,7 @@
 #define OAD_PACKET_SIZE                       18
 #define KEY_STATE_OFFSET                      13 // Offset in advertising data
    
-#define PowerLowV                             2000u//0u//3700u
+#define PowerLowV                             3400u//0u//3700u
 #define PowerVth                              100u//0u//100u
 
 
@@ -273,7 +273,7 @@ const static PIN_Config ControllerAppPinTable[] =
     Board_LED1       | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_OPENSOURCE | PIN_DRVSTR_MAX,    /* LED initially off             */
     Board_LED2       | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_OPENSOURCE | PIN_DRVSTR_MAX,
     Board_KEY        | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_BOTHEDGES | PIN_HYSTERESIS,         /* Button is active low          */
-    Board_PER_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MIN,    /* Peripheral Power initially off*/
+    Board_PER_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MED,    /* Peripheral Power initially off*/
     PeripheralKey1   | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_BOTHEDGES | PIN_HYSTERESIS,
 #ifdef Debug_AUX_TX
     Board_AUX_TX     | PIN_INPUT_DIS | PIN_PUSHPULL | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH,
@@ -555,16 +555,16 @@ static void Controller_init(void)
   LocalBatteryVoltage = GetBatteryVoltage()*2;
   LocalBatteryVoltage /= 1000;
   
-  if( LocalBatteryVoltage <= PowerLowV) // Power Low Err
+  /*if( LocalBatteryVoltage <= PowerLowV) // Power Low Err
   {
     uint8_t i;
-    System_printf("Low Power!!!\n\r");
+    System_printf("System Low Power!!!%d\n\r",LocalBatteryVoltage);
     for(i = 0; i< 10; i++)
       Controller_blinkLed(Board_LED2, TEST_INDICATION_BLINKS);
     
     System_printf("System Halt.\n\r");
     PowerCtrlStateSet(PWRCTRL_STANDBY);
-  }
+  }*/
   
   // Add application specific device information
   HCI_EXT_SetTxPowerCmd(HCI_EXT_TX_POWER_4_DBM);
@@ -720,10 +720,10 @@ static void Controller_taskFxn(UArg a0, UArg a1)
       if (PowerEnable)
       {
         uint16_t BatVolt = GetBatteryVoltage() * 2 / 1000;
-        if(BatVolt < (PowerLowV - PowerVth))
+        /*if(BatVolt < (PowerLowV - PowerVth))
         {
           uint8_t i;
-          System_printf("Low Power!!!\n\r");
+          System_printf("Low Power!!!%d\n\r",BatVolt);
           Controller_PowerEnable(false);
           
           for(i = 0; i< 10; i++)
@@ -739,7 +739,7 @@ static void Controller_taskFxn(UArg a0, UArg a1)
           
           System_printf("System Halt.\n\r");
           PowerCtrlStateSet(PWRCTRL_STANDBY);
-        }
+        }*/
       }
     }
     if (!!(events & ST_SENSORCONCTOLLER_EVT))
@@ -806,13 +806,13 @@ static void Controller_PowerEnable(uint8_t Enable)
   if(Enable)
   {
     PIN_setOutputValue(hGpioPin, Board_PER_POWER, Board_PER_POWER_ON);
-    PowerEnable = 0x01;
+    PowerEnable = 1;
     delay_ms(50);
   }
   else
   {
     PIN_setOutputValue(hGpioPin, Board_PER_POWER, Board_PER_POWER_OFF);
-    PowerEnable = 0x00;
+    PowerEnable = 0;
   }
 }
 
