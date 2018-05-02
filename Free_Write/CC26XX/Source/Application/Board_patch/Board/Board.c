@@ -66,8 +66,8 @@ PIN_Config BoardGpioInitTable[] = {
     Board_LED1       | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_OPENSOURCE | PIN_DRVSTR_MAX,    /* LED initially off             */
     Board_LED2       | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_OPENSOURCE | PIN_DRVSTR_MAX,
     Board_KEY        | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_BOTHEDGES | PIN_HYSTERESIS,         /* Button is active low          */
-    Board_PER_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MED,    /* Peripheral Power initially off*/
-    Board_MPU_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_LOW | PIN_PUSHPULL | PIN_DRVSTR_MED,
+    Board_PER_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_DRVSTR_MAX,    /* Peripheral Power initially off*/
+    Board_MPU_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_DRVSTR_MAX,
     /*Board_POWERDetDIO | PIN_INPUT_DIS | PIN_GPIO_OUTPUT_DIS,*/
     PeripheralKey1   | PIN_INPUT_EN | PIN_PULLUP | PIN_IRQ_BOTHEDGES | PIN_HYSTERESIS,
     PIN_TERMINATE
@@ -189,10 +189,10 @@ const I2C_Config I2C_config[] = {
 
 /* Include drivers */
 #include <ti/drivers/adc/ADCCC26XX.h>
-/* I2C objects */
+/* ADC objects */
 ADCCC26XX_Object adcCC26xxObjects[CC2650_ADCCOUNT];
 
-/* I2C configuration structure, describing which pins are to be used */
+/* ADC configuration structure, describing which pins are to be used */
 const ADCCC26XX_HWAttrs adcCC26XX_HWAttrs[CC2650_ADCCOUNT] = {
     {
       //.adcDIO = Board_POWERDetDIO,

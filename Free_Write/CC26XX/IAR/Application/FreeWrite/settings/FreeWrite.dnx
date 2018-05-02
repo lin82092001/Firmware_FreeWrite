@@ -12,15 +12,15 @@
         <ByteLimit>50</ByteLimit>
     </Stack>
     <XdsDriver>
-        <xds110serialNo>L1000782</xds110serialNo>
-        <xds110foundProbes />
-        <xdsResetStyle>0</xdsResetStyle>
-        <xdsResetStrategy>3</xdsResetStrategy>
         <CStepIntDis>_ 0</CStepIntDis>
         <LeaveTargetRunning>_ 0</LeaveTargetRunning>
+        <xdsResetStyle>0</xdsResetStyle>
+        <xdsResetStrategy>3</xdsResetStrategy>
+        <xds110serialNo>L3000684</xds110serialNo>
+        <xds110foundProbes />
     </XdsDriver>
     <DebugChecksum>
-        <Checksum>1187347687</Checksum>
+        <Checksum>4251959893</Checksum>
     </DebugChecksum>
     <Exceptions>
         <StopOnUncaught>_ 0</StopOnUncaught>
@@ -32,21 +32,6 @@
     <Disassembly>
         <MixedMode>1</MixedMode>
     </Disassembly>
-    <LogFile>
-        <LoggingEnabled>_ 0</LoggingEnabled>
-        <LogFile>_ ""</LogFile>
-        <Category>_ 0</Category>
-    </LogFile>
-    <TermIOLog>
-        <LoggingEnabled>_ 0</LoggingEnabled>
-        <LogFile>_ ""</LogFile>
-    </TermIOLog>
-    <CallStackLog>
-        <Enabled>0</Enabled>
-    </CallStackLog>
-    <CallStackStripe>
-        <ShowTiming>1</ShowTiming>
-    </CallStackStripe>
     <Trace1>
         <Enabled>0</Enabled>
         <ShowSource>1</ShowSource>
@@ -87,6 +72,11 @@
     <Breakpoints2>
         <Count>0</Count>
     </Breakpoints2>
+    <LogFile>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+        <Category>_ 0</Category>
+    </LogFile>
     <Aliases>
         <A0>_ "C:\hudson\workspace\FWGroup-DriverLib\modules\output\cc26xx_cha_2_2_ext\driverlib\adi.h" ""</A0>
         <A1>_ "C:\hudson\workspace\FWGroup-DriverLib\modules\output\cc26xx_cha_2_2_ext\driverlib\aon_ioc.h" ""</A1>
@@ -98,4 +88,14 @@
         <Count>7</Count>
         <SuppressDialog>0</SuppressDialog>
     </Aliases>
+    <CallStackLog>
+        <Enabled>0</Enabled>
+    </CallStackLog>
+    <CallStackStripe>
+        <ShowTiming>1</ShowTiming>
+    </CallStackStripe>
+    <TermIOLog>
+        <LoggingEnabled>_ 0</LoggingEnabled>
+        <LogFile>_ ""</LogFile>
+    </TermIOLog>
 </settings>

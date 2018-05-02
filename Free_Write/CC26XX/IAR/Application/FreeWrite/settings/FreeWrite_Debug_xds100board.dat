@@ -2,6 +2,7 @@
 $ sepk
   pod_drvr=jioxds110.dll
   pod_port=0
+  pod_serial=L3000684
 $ /
 $ product
   title="Texas Instruments XDS110 USB"
@@ -10,9 +11,20 @@ $ product
 $ /
 $ uscif
   tdoedge=FALL
+  tclk_program=DEFAULT
+  tclk_frequency=2.5MHz
+$ /
+$ dot7
+  dts_usage=enable
+  dts_type=xds110
+  dts_program=emulator
+  dts_frequency=1.0MHz
+  ts_format=jscan0
+  ts_pin_width=all_four
 $ /
 $ swd
-  mode=disabled
+  swd_debug=disabled
+  swo_data=aux_uart
 $ /
 @ icepick_c family=icepick_c irbits=6 drbits=1 subpaths=1
   & subpath_0 address=16 default=no custom=yes force=yes pseudo=no

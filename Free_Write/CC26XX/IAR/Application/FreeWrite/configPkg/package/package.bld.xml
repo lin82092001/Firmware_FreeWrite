@@ -20,12 +20,12 @@
     </makefiles>
     <targets>
         <target name="iar.targets.arm.M3"
-            version="iar.targets.arm.M3{1,0,7.40,3"
-            rawVersion="7.40.3.8902"
+            version="iar.targets.arm.M3{1,0,8.11,2"
+            rawVersion="8.11.2.13589"
             platform="ti.platforms.tiva:LM3S9B92:1"
             isa="v7M"
             suffix="rm3"
-            rootDir="C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm"
+            rootDir="C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm"
             os="undefined"
             rts="iar.targets.arm.rts">
             <model endian="little"

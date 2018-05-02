@@ -1,5 +1,3 @@
- -B 
-
 "--endian=little" 
 
 "--cpu=Cortex-M3" 

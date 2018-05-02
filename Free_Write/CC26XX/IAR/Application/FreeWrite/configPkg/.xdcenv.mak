@@ -1,5 +1,5 @@
 #
-_XDCBUILDCOUNT = 
+_XDCBUILDCOUNT = 0
 ifneq (,$(findstring path,$(_USEXDCENV_)))
 override XDCPATH = C:/ti/tirtos_simplelink_2_13_00_06/products/bios_6_42_00_08/packages
 override XDCROOT = C:/ti/xdctools_3_31_01_33_core

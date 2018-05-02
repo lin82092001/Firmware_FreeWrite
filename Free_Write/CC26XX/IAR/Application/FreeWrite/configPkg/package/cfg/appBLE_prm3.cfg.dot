@@ -419,6 +419,6 @@ digraph configuration {
     ti_sysbios_xdcruntime__bot -> iar_targets_arm_M3__1_0_7__40_2 [ltail=cluster37];
     iar_targets_arm_M3__1_0_7__40_2 [shape=record,label="iar.targets.arm.M3|1,0,7.40,2",style=filled, fillcolor=lightgrey];
     ti_sysbios_utils__bot -> iar_targets_arm_M3__1_0_7__40_2 [ltail=cluster38];
-    iar_targets_arm_M3__1_0_7__40_3 [shape=record,label="iar.targets.arm.M3|1,0,7.40,3",style=filled, fillcolor=lightgrey];
-    configPkg__top -> iar_targets_arm_M3__1_0_7__40_3 [ltail=cluster39];
+    iar_targets_arm_M3__1_0_8__11_2 [shape=record,label="iar.targets.arm.M3|1,0,8.11,2",style=filled, fillcolor=lightgrey];
+    configPkg__top -> iar_targets_arm_M3__1_0_8__11_2 [ltail=cluster39];
 }

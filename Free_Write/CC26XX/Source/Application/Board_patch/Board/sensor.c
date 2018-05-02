@@ -134,7 +134,7 @@ uint8_t sensorTestExecute(uint8_t testMap)
         if (sensorSelMpu9250Test(i))
         {
           FigSelfTestResult |= 1<<(i-1);
-          if (sensorSelMpu9250Test(i|MPU9250_Serial_MASK))
+          if (sensorSelMpu9250Test(i|MPU9250_Serial_MASK))//0x80
             FigSelfTestResult |= 0x100<<(i-1);
         }
       }

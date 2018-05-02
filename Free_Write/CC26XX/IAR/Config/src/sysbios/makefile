@@ -1,7 +1,7 @@
 
 MAKEFLAGS = -j16
 
-RTSLIB = -iC:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/lib/ -llibc.a
+RTSLIB = -iC:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/lib/ -llibc.a
 
 XDCLIB = -l "C:/ti/xdctools_3_31_01_33_core/packages/iar/targets/arm/rts/lib/release/boot.arm3" 
 
@@ -10,7 +10,7 @@ XOPTS = -I"C:/ti/xdctools_3_31_01_33_core/packages/" -I"C:/ti/xdctools_3_31_01_3
 vpath % C:/ti/tirtos_simplelink_2_13_00_06/products/bios_6_42_00_08/packages/ti/sysbios/
 vpath %.c C:/ti/xdctools_3_31_01_33_core/packages/
 
-CCOPTS    = --aeabi --cpu=Cortex-M3 --diag_suppress=Pa050,Go005 --endian=little -e --thumb --silent  --mfc -Ohz  -Dti_sysbios_family_arm_cc26xx_Boot_driverlibVersion=2 -Dti_sysbios_family_arm_m3_Hwi_enableException__D=FALSE -Dti_sysbios_family_arm_m3_Hwi_disablePriority__D=32U -Dti_sysbios_family_arm_m3_Hwi_numSparseInterrupts__D=0U  --dlib_config C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/inc/c/DLib_Config_Normal.h
+CCOPTS    = --aeabi --cpu=Cortex-M3 --diag_suppress=Pa050,Go005 --endian=little -e --thumb --silent  --mfc -Ohz  -Dti_sysbios_family_arm_cc26xx_Boot_driverlibVersion=2 -Dti_sysbios_family_arm_m3_Hwi_enableException__D=FALSE -Dti_sysbios_family_arm_m3_Hwi_disablePriority__D=32U -Dti_sysbios_family_arm_m3_Hwi_numSparseInterrupts__D=0U  --dlib_config C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/inc/c/DLib_Config_Normal.h
 
 XDC_ROOT  = C:/ti/xdctools_3_31_01_33_core/packages/
 
@@ -26,13 +26,13 @@ TARGET_INC = -I"C:/ti/tirtos_simplelink_2_13_00_06/products/bios_6_42_00_08/pack
 
 INCS = $(BIOS_INC) $(TARGET_INC)   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/../../../Source/Application/Board_patch/Board/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/../../../Source/Application/Board_patch/interfaces/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Free_Write/CC26XX/IAR/Application/FreeWrite/../../../Source/Application/Board_patch/devices/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Include/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/ICall/Include/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Profiles/Roles/CC26xx/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Profiles/Roles/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Profiles/Keys/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Profiles/DevInfo/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Profiles/SensorProfile/cc26xx/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/Profiles/OAD/cc26xxST/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Projects/ble/common/cc26xx/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/applib/heap/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/ble/hci/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/ble/controller/CC26xx/include/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/ble/host/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/hal/target/CC2650TIRTOS/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/hal/target/_common/cc26xx/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/hal/include/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/osal/include/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/services/sdata/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/services/saddr/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/icall/include/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/icall/ports/tirtos/   -IC:/ti/simplelink/ble_cc26xx_2_01_01_44627/Components/ble/include/   -IC:/ti/tirtos_simplelink_2_13_00_06/packages/   -IC:/ti/tirtos_simplelink_2_13_00_06/products/cc26xxware_2_21_01_15600/   -IC:/ti/tirtos_simplelink_2_13_00_06/products/bios_6_42_00_08/packages/ 
 
-CC = LC_ALL=C  C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/bin/iccarm $(CCOPTS)
-ASM = LC_ALL=C  C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/bin/iasmarm --cpu Cortex-M3 --endian little -S
-AR = LC_ALL=C  C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/bin/iarchive 
+CC = LC_ALL=C  C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/bin/iccarm $(CCOPTS)
+ASM = LC_ALL=C  C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/bin/iasmarm --cpu Cortex-M3 --endian little -S
+AR = LC_ALL=C  C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/bin/iarchive 
 
-CC_LIB = C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/bin/iccarm --aeabi --cpu=Cortex-M3 --diag_suppress=Pa050,Go005 --endian=little -e --thumb --silent  --mfc -Ohz  -Dti_sysbios_family_arm_cc26xx_Boot_driverlibVersion=2 -Dti_sysbios_family_arm_m3_Hwi_enableException__D=FALSE -Dti_sysbios_family_arm_m3_Hwi_disablePriority__D=32U -Dti_sysbios_family_arm_m3_Hwi_numSparseInterrupts__D=0U -I C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/include
+CC_LIB = C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/bin/iccarm --aeabi --cpu=Cortex-M3 --diag_suppress=Pa050,Go005 --endian=little -e --thumb --silent  --mfc -Ohz  -Dti_sysbios_family_arm_cc26xx_Boot_driverlibVersion=2 -Dti_sysbios_family_arm_m3_Hwi_enableException__D=FALSE -Dti_sysbios_family_arm_m3_Hwi_disablePriority__D=32U -Dti_sysbios_family_arm_m3_Hwi_numSparseInterrupts__D=0U -I C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/include
 
-CC_PP = C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/bin/iccarm --aeabi --cpu=Cortex-M3 --diag_suppress=Pa050,Go005 --endian=little -e --thumb --silent  --mfc   -Dti_sysbios_family_arm_cc26xx_Boot_driverlibVersion=2   -Dti_sysbios_family_arm_m3_Hwi_numSparseInterrupts__D=0U -I C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/include  --dlib_config C:/PROGRA~2/IARSYS~1/EMBEDD~1.2/arm/inc/c/DLib_Config_Normal.h
+CC_PP = C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/bin/iccarm --aeabi --cpu=Cortex-M3 --diag_suppress=Pa050,Go005 --endian=little -e --thumb --silent  --mfc   -Dti_sysbios_family_arm_cc26xx_Boot_driverlibVersion=2   -Dti_sysbios_family_arm_m3_Hwi_numSparseInterrupts__D=0U -I C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/include  --dlib_config C:/PROGRA~2/IARSYS~1/EMBEDD~1.0/arm/inc/c/DLib_Config_Normal.h
 
 DEL = cmd.exe /q /c del /f
 CP = cmd.exe /q /c copy /Y

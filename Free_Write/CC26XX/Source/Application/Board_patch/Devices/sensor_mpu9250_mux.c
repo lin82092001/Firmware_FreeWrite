@@ -247,7 +247,17 @@ static int16_t calZ[MPU_Count * 2] = {0};
 static uint8_t scale = MFS_16BITS;      // 16 bit resolution
 static uint8_t mode = MAG_MODE_CONT2;  // Operating mode
 
+// Pins that are used by the MPU9250
+static PIN_Config MpuPinTable[] =
+{
+    //Board_MPU_INT    | PIN_INPUT_EN | PIN_PULLDOWN | PIN_IRQ_DIS | PIN_HYSTERESIS,
+    Board_MPU_POWER  | PIN_GPIO_OUTPUT_EN | PIN_GPIO_HIGH | PIN_PUSHPULL | PIN_DRVSTR_MAX,
+
+    PIN_TERMINATE
+};
+static PIN_State pinGpioState;
 static PIN_Handle hMpuPin;
+
 /*******************************************************************************
 * @fn          SENSOR_SELECT
 *
@@ -257,7 +267,7 @@ static PIN_Handle hMpuPin;
 */
 static bool SENSOR_SELECT(uint8_t RSel)
 {
-  uint8_t sel = (RSel&MPU9250_Count_MASK);
+  uint8_t sel = (RSel&MPU9250_Count_MASK);//MPU9250_Count_MASK 0x0f
   ST_ASSERT((sel&MPU9250_Count_MASK)<MPU_Count);
   if(sel == MPU_Board)
     return bspI2cSelect(BSP_I2C_INTERFACE_1,SENSOR_I2C_ADDRESS);
@@ -384,7 +394,7 @@ void sensorBoardMpu9250PowerOff(void)
 */
 bool sensorBoardMpu9250PowerIsOn(void)
 {
-  return PIN_getOutputValue(Board_MPU_POWER) == Board_MPU_POWER_ON;
+ return PIN_getOutputValue(Board_MPU_POWER) == Board_MPU_POWER_ON;
  //return PIN_getOutputValue(Board_PER_POWER) == Board_PER_POWER_ON;
 }
 
@@ -397,6 +407,7 @@ bool sensorBoardMpu9250PowerIsOn(void)
 */
 bool sensorBoardMpu9250Init(void)
 {
+  hMpuPin = PIN_open(&pinGpioState, MpuPinTable);
   return sensorSelMpu9250Reset(MPU_Board);
 }
 
