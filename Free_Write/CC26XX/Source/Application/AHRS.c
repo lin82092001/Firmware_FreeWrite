@@ -113,7 +113,7 @@ extern volatile uint16_t Calibrated;
 /*********************************************************************
  * EXTERNAL FUNCTIONS
  */
-extern void FIG_UpdRef(float Roll, float P, float Ax, float Ay, float Az, float Mx, float My, float Mz, float Gx, float Gy, float Gz);
+extern void FIG_UpdRef(float R, float P,float Y, float Ax, float Ay, float Az, float Mx, float My, float Mz, float Gx, float Gy, float Gz);
 extern void Controller_Capacitive_Touch_Config(uint8_t Enable);
 
 /*********************************************************************
@@ -692,7 +692,7 @@ void AHRS_Convert(int16_t *data, float *ahr)
   ahr[0] *= Ra2De;
   ahr[1] *= Ra2De;
   ahr[2] *= Ra2De;
-  FIG_UpdRef(ahr[2], ahr[1], datas[3], datas[4],datas[5], datas[6], datas[7], datas[8], datas[0], datas[1], datas[2]);
+  FIG_UpdRef(ahr[2], ahr[1], ahr[0], datas[3], datas[4],datas[5], datas[6], datas[7], datas[8], datas[0], datas[1], datas[2]);
   
   /*if(Crossing1)
     System_printf("Corssing 1G, Delte Acc = %10f\n\r", DeltaAcc);*/

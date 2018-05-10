@@ -87,9 +87,10 @@ static volatile bool ResetLock = false;
 static volatile bool ReadLock = false;
 static volatile bool DumpMag = false;
 static uint8_t MPUSettingStat = 0x00;
-/*static float DRoll = 0.0;
+static float DRoll = 0.0;
 static float DPitch = 0.0;
-static float DAccRef[3] = {0.0};
+static float DYaw = 0.0;
+/*static float DAccRef[3] = {0.0};
 static float DMagRef[3] = {0.0};
 static float DGyroRef[3] = {0.0};*/
 int8_t MagOffset[FigCount * 3] = { 0 };
@@ -108,7 +109,7 @@ static int16_t SAng[FigCount+1] = {0};
 #define KeyStatus       SAng[FigCount]
 static uint16_t timecounter = 0;
 
-uint32_t lastUpdate2;
+/*uint32_t lastUpdate2;
 uint32_t lastUpdate3;
 uint32_t lastUpdate4;
 uint32_t lastUpdate5;
@@ -131,7 +132,7 @@ float qC[4]={1,0,0,0};
 float qD[4]={1,0,0,0};
 float qE[4]={1,0,0,0};
 float qF[4]={1,0,0,0};
-float qG[4]={1,0,0,0};
+float qG[4]={1,0,0,0};*/
 
 /*********************************************************************
  * LOCAL FUNCTIONS
@@ -142,7 +143,8 @@ static void initCharacteristicValue(uint8_t paramID, uint8_t value,
 static bool PeriCheck(void);//Check if AHRS Disable
 static void FIG_clockHandler(UArg arg);
 static void GetAngleDiff(void);
-void Figupdate(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz,uint8_t S);
+//void Figupdate(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz,uint8_t S);
+float ATAN2(float y,float x);
 /*********************************************************************
  * PROFILE CALLBACKS
  */
@@ -265,14 +267,15 @@ void FIG_reset(void)
   KeyStatus = 0x00;
 }
 
-void FIG_UpdRef(float R, float P, float Ax, float Ay, float Az, float Mx, float My, float Mz, float Gx, float Gy, float Gz)
+void FIG_UpdRef(float R, float P,float Y, float Ax, float Ay, float Az, float Mx, float My, float Mz, float Gx, float Gy, float Gz)
 {
   if(ReadLock)
     return;
   ReadLock = true;
-  /*DRoll = R;
+  DRoll = R;
   DPitch = P;
-  DAccRef[0] = Ax;
+  DYaw = Y;
+  /*DAccRef[0] = Ax;
   DAccRef[1] = Ay;
   DAccRef[2] = Az;
   DMagRef[0] = Mx;
@@ -435,21 +438,30 @@ static void FIG_clockHandler(UArg arg)
 }
 static void GetAngleDiff()
 {
-  /*float recipNorm = 1.0;
+  //float recipNorm = 1.0;
   float Roll = 0.0;//Y-Z Axis
   float Pitch = 0.0;
-  float Roll_M = 0.0;
+  float Yaw = 0.0;
+  /*float Roll_M = 0.0;
   float AccRef[3] = {0.0};
   float MagRef[3] = {0.0};
   float GyroRef[3] = {0.0};*/
   //float *CalAcc;
   float acc[3];
-  //float acc2[3];
+  float acc2[3];
   float mag[3];
-  //float mag2[3];
+  float mag2[3];
   float gyro[3];
   //float gyro2[3];
-  float roll=0.0;
+  float roll = 0.0;
+  float pitch = 0.0;
+  float yaw = 0.0;
+  float roll_diff;  
+  float pitch_diff;
+  float yaw_diff;
+  float Hx,Hy;
+  float roll_comp;
+  float pitch_comp;
   //float Dot[2] = {0.0};  
   uint8_t NeedReSend = 0x00;
   uint8_t i;
@@ -466,9 +478,10 @@ static void GetAngleDiff()
     return;
   
   ReadLock = true;
-  /*Roll = DRoll*De2Ra;
+  Roll = DRoll*De2Ra;
   Pitch = DPitch*De2Ra;
-  AccRef[0] = DAccRef[0];
+  Yaw = DYaw*De2Ra;
+  /*AccRef[0] = DAccRef[0];
   AccRef[1] = DAccRef[1];
   AccRef[2] = DAccRef[2];
   MagRef[0] = DMagRef[0];
@@ -514,9 +527,9 @@ static void GetAngleDiff()
         if(tempj == 1)
         {
           _Sel = ( Sens[i] | MPU9250_Serial_MASK );
-          /*memcpy(mag2, mag, 12);
+          memcpy(mag2, mag, 12);
           memcpy(acc2, acc, 12);
-          CalAcc = acc2;*/
+          //CalAcc = acc2;
         }
         /*else
           CalAcc = AccRef;*/
@@ -596,7 +609,7 @@ static void GetAngleDiff()
             
             SuccessRead++;           
             //Finger Section1
-            if(_Sel == MPU_FIG1)
+            /*if(_Sel == MPU_FIG1)
             {
               deltat2 = ((Now2 - lastUpdate2 + calTime2)/100000.0f);
               Figupdate(gyro[0]*De2Ra,gyro[1]*De2Ra,gyro[2]*De2Ra,acc[0],acc[1],acc[2],mag[0],mag[1],mag[2],MPU_FIG1);
@@ -652,10 +665,31 @@ static void GetAngleDiff()
               Figupdate(gyro[0]*De2Ra,gyro[1]*De2Ra,gyro[2]*De2Ra,acc[0],acc[1],acc[2],mag[0],mag[1],mag[2],MPU_FIG3|MPU9250_Serial_MASK);
               lastUpdate9= Clock_getTicks();
               roll = atan2(2.0f * (qG[0] * qG[1] + qG[2] * qG[3]), qG[0] * qG[0] - qG[1] * qG[1] - qG[2] * qG[2] + qG[3] * qG[3]);
-            }
+            }*/
             
-            roll*=Ra2De;
-            AngleG=roll;            
+            roll = ATAN2(acc[1],acc[2]);// roll=ay/az
+            pitch = ATAN2(acc[0],acc[2]);// pitch=ax/az
+            
+            roll_comp=fabs(cos(pitch)); 
+            pitch_comp=fabs(cos(roll));
+            
+            roll*=roll_comp;// compensation pitch, because compute pitch and do roll action, pitch incorrect
+            pitch*=pitch_comp;// compensation pitch, because compute pitch and do roll action, pitch incorrect
+            
+            Hy = mag[0]*sin(roll)*sin(pitch) + mag[1]*cos(roll) + mag[2]*cos(pitch)*sin(roll);
+            Hx = mag[0]*cos(pitch) + mag[2]*sin(pitch);
+            yaw = ATAN2(Hy,Hx);
+            
+            roll_diff = roll - Roll; 
+            pitch_diff = pitch - Pitch;
+            yaw_diff = yaw - Yaw;
+            
+            //roll_comp=fabs(cos(pitch));
+            roll_diff*=Ra2De;
+            pitch_diff*=Ra2De;
+            yaw_diff*=Ra2De;            
+            
+            AngleG=roll_diff + pitch_diff;            
             /*if(_Sel == MPU_FIG5)
             {
               Dot[0] = acc[0]*CalAcc[0] + acc[2]*CalAcc[1];
@@ -696,11 +730,11 @@ static void GetAngleDiff()
               AngleG = Roll * AngleG + Roll_M * AngleM;*/            
           }
         }
-        while(AngleG>180)
-          AngleG-=360;
+        /*while(AngleG>180)
+          AngleG-=180;
         while(AngleG<-180)
-          AngleG+=360;
-        //AngleG = fabs(AngleG);
+          AngleG+=180;*/
+        AngleG = fabs(AngleG);
         
         if(tempj != 1)
         {
@@ -744,7 +778,7 @@ static void GetAngleDiff()
     sensorWriteScheduled = true;
   I2CMUX_RESET();
 }
-void Figupdate(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz,uint8_t S)
+/*void Figupdate(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz,uint8_t S)
 {
     volatile float recipNorm=0.0f;
     volatile float s0=0.0f, s1=0.0f, s2=0.0f, s3=0.0f;
@@ -956,4 +990,27 @@ void Figupdate(float gx, float gy, float gz, float ax, float ay, float az, float
       qG[2] = q2;
       qG[3] = q3;
     }
+}*/
+float ATAN2(float y,float x)
+{
+  float angle=0;
+  
+  if(x==0)
+  {
+    if(y>0)
+      angle=M_PI_2;
+    else if(y<0)
+      angle=-M_PI_2;
+  }
+  else if(x<0)
+  {
+    if(y>=0)
+      angle=atan(y/x)+M_PI;
+    else if(y<0)
+      angle=atan(y/x)-M_PI;
+  }
+  else if(x>0)
+    angle=atan(y/x);
+  
+  return angle;
 }

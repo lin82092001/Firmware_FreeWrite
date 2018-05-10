@@ -51,7 +51,7 @@ void ControllerFig_processSensorEvent(void);
 /*
  * Update reference angle
  */
-void FIG_UpdRef(float Roll, float P, float Ax, float Ay, float Az, float Mx, float My, float Mz, float Gx, float Gy, float Gz);
+void FIG_UpdRef(float R, float P,float Y, float Ax, float Ay, float Az, float Mx, float My, float Mz, float Gx, float Gy, float Gz);
 
 /*
  * Update Keys Status
