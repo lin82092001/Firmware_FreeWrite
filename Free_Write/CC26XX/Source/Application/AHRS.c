@@ -682,6 +682,9 @@ void AHRS_Convert(int16_t *data, float *ahr)
   ahr[0] = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) + M_PI;
   ahr[1] =  asin(2.0f * (q[0] * q[2] - q[1] * q[3]));
   ahr[2] = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]), q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);
+  
+  ahr[1] *= cos(ahr[2]);
+  ahr[2] *= cos(ahr[1]);
   /*
   ahr[0]:Yaw
   ahr[1]:Pitch

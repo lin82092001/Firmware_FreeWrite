@@ -109,16 +109,16 @@ static int16_t SAng[FigCount+1] = {0};
 #define KeyStatus       SAng[FigCount]
 static uint16_t timecounter = 0;
 
-/*uint32_t lastUpdate2;
-uint32_t lastUpdate3;
+uint32_t lastUpdate2;
+/*uint32_t lastUpdate3;
 uint32_t lastUpdate4;
 uint32_t lastUpdate5;
 uint32_t lastUpdate6;
 uint32_t lastUpdate7;
 uint32_t lastUpdate8;
-uint32_t lastUpdate9;
+uint32_t lastUpdate9;*/
 float deltat2;
-float deltat3;
+/*float deltat3;
 float deltat4;
 float deltat5;
 float deltat6;
@@ -133,7 +133,7 @@ float qD[4]={1,0,0,0};
 float qE[4]={1,0,0,0};
 float qF[4]={1,0,0,0};
 float qG[4]={1,0,0,0};*/
-
+float G=0.0f;
 /*********************************************************************
  * LOCAL FUNCTIONS
  */
@@ -145,6 +145,7 @@ static void FIG_clockHandler(UArg arg);
 static void GetAngleDiff(void);
 //void Figupdate(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz,uint8_t S);
 float ATAN2(float y,float x);
+float Azimuth(float y,float x);
 /*********************************************************************
  * PROFILE CALLBACKS
  */
@@ -445,8 +446,8 @@ static void GetAngleDiff()
   /*float Roll_M = 0.0;
   float AccRef[3] = {0.0};
   float MagRef[3] = {0.0};
-  float GyroRef[3] = {0.0};*/
-  //float *CalAcc;
+  float GyroRef[3] = {0.0};
+  float *CalAcc;*/
   float acc[3];
   float acc2[3];
   float mag[3];
@@ -461,7 +462,7 @@ static void GetAngleDiff()
   float yaw_diff;
   float Hx,Hy;
   float roll_comp;
-  float pitch_comp;
+  float pitch_comp;  
   //float Dot[2] = {0.0};  
   uint8_t NeedReSend = 0x00;
   uint8_t i;
@@ -478,9 +479,9 @@ static void GetAngleDiff()
     return;
   
   ReadLock = true;
-  Roll = DRoll*De2Ra;
-  Pitch = DPitch*De2Ra;
-  Yaw = DYaw*De2Ra;
+  Roll = DRoll;
+  Pitch = DPitch;
+  Yaw = DYaw;
   /*AccRef[0] = DAccRef[0];
   AccRef[1] = DAccRef[1];
   AccRef[2] = DAccRef[2];
@@ -670,26 +671,30 @@ static void GetAngleDiff()
             roll = ATAN2(acc[1],acc[2]);// roll=ay/az
             pitch = ATAN2(acc[0],acc[2]);// pitch=ax/az
             
+            if(pitch>M_PI_2)
+              pitch-=M_PI;
+            else if(pitch<-M_PI_2)
+              pitch+=M_PI;
+            
             roll_comp=fabs(cos(pitch)); 
             pitch_comp=fabs(cos(roll));
             
-            roll*=roll_comp;// compensation pitch, because compute pitch and do roll action, pitch incorrect
+            roll*=roll_comp;// compensation roll, because compute roll and do pitch action, roll incorrect
             pitch*=pitch_comp;// compensation pitch, because compute pitch and do roll action, pitch incorrect
             
-            Hy = mag[0]*sin(roll)*sin(pitch) + mag[1]*cos(roll) + mag[2]*cos(pitch)*sin(roll);
+            Hy = mag[0]*sin(roll)*sin(pitch) + mag[1]*cos(roll) + mag[2]*cos(pitch)*sin(roll);// Tilt compensation
             Hx = mag[0]*cos(pitch) + mag[2]*sin(pitch);
-            yaw = ATAN2(Hy,Hx);
+            yaw = ATAN2(mag[1],mag[0]);
+            
+            roll*=Ra2De;
+            pitch*=Ra2De;
+            yaw*=Ra2De;
             
             roll_diff = roll - Roll; 
             pitch_diff = pitch - Pitch;
             yaw_diff = yaw - Yaw;
             
-            //roll_comp=fabs(cos(pitch));
-            roll_diff*=Ra2De;
-            pitch_diff*=Ra2De;
-            yaw_diff*=Ra2De;            
-            
-            AngleG=roll_diff + pitch_diff;            
+            AngleG = yaw;           
             /*if(_Sel == MPU_FIG5)
             {
               Dot[0] = acc[0]*CalAcc[0] + acc[2]*CalAcc[1];
@@ -1013,4 +1018,27 @@ float ATAN2(float y,float x)
     angle=atan(y/x);
   
   return angle;
+}
+float Azimuth(float y,float x)
+{
+  float azimuth = 0.0f;
+  
+  if(x>0)
+  {
+    if(y<0)
+      azimuth = -atan(y/x);
+    else if(y>0)
+      azimuth = 2*M_PI - atan(y/x);
+  }
+  else if(x==0)
+  {
+    if(y<0)
+      azimuth = M_PI_2;
+    else if(y>0)
+      azimuth = 3*M_PI_2;
+  }
+  else if(x<0)
+    azimuth = M_PI - atan(y/x);
+  
+  return azimuth;
 }
