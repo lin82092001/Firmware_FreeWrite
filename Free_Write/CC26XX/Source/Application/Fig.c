@@ -110,15 +110,15 @@ static int16_t SAng[FigCount+1] = {0};
 static uint16_t timecounter = 0;
 
 uint32_t lastUpdate2;
-/*uint32_t lastUpdate3;
+uint32_t lastUpdate3;
 uint32_t lastUpdate4;
 uint32_t lastUpdate5;
 uint32_t lastUpdate6;
 uint32_t lastUpdate7;
 uint32_t lastUpdate8;
-uint32_t lastUpdate9;*/
+uint32_t lastUpdate9;
 float deltat2;
-/*float deltat3;
+float deltat3;
 float deltat4;
 float deltat5;
 float deltat6;
@@ -132,8 +132,8 @@ float qC[4]={1,0,0,0};
 float qD[4]={1,0,0,0};
 float qE[4]={1,0,0,0};
 float qF[4]={1,0,0,0};
-float qG[4]={1,0,0,0};*/
-float G=0.0f;
+float qG[4]={1,0,0,0};
+
 /*********************************************************************
  * LOCAL FUNCTIONS
  */
@@ -144,8 +144,7 @@ static bool PeriCheck(void);//Check if AHRS Disable
 static void FIG_clockHandler(UArg arg);
 static void GetAngleDiff(void);
 //void Figupdate(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz,uint8_t S);
-float ATAN2(float y,float x);
-float Azimuth(float y,float x);
+//float Azimuth(float y,float x);
 /*********************************************************************
  * PROFILE CALLBACKS
  */
@@ -462,8 +461,10 @@ static void GetAngleDiff()
   float yaw_diff;
   float Hx,Hy;
   float roll_comp;
-  float pitch_comp;  
-  //float Dot[2] = {0.0};  
+  float pitch_comp;
+  /*float A[3]={0.0f,0.0f,0.0f};
+  float B[3]={0.0f,0.0f,0.0f}; 
+  float Dot[2] = {0.0};*/ 
   uint8_t NeedReSend = 0x00;
   uint8_t i;
   uint8_t tempj = 0;
@@ -615,38 +616,39 @@ static void GetAngleDiff()
               deltat2 = ((Now2 - lastUpdate2 + calTime2)/100000.0f);
               Figupdate(gyro[0]*De2Ra,gyro[1]*De2Ra,gyro[2]*De2Ra,acc[0],acc[1],acc[2],mag[0],mag[1],mag[2],MPU_FIG1);
               lastUpdate2 = Clock_getTicks();
-              roll = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]), q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);
+              //roll = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]), q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);
             }
             else if(_Sel == MPU_FIG2)
             {       
               deltat3 = ((Now2 - lastUpdate3 + calTime2)/100000.0f);   
               Figupdate(gyro[0]*De2Ra,gyro[1]*De2Ra,gyro[2]*De2Ra,acc[0],acc[1],acc[2],mag[0],mag[1],mag[2],MPU_FIG2);
               lastUpdate3 = Clock_getTicks();
-              roll = atan2(2.0f * (qA[0] * qA[1] + qA[2] * qA[3]), qA[0] * qA[0] - qA[1] * qA[1] - qA[2] * qA[2] + qA[3] * qA[3]);
+              //roll = atan2(2.0f * (qA[0] * qA[1] + qA[2] * qA[3]), qA[0] * qA[0] - qA[1] * qA[1] - qA[2] * qA[2] + qA[3] * qA[3]);
             }
             else if(_Sel == MPU_FIG3)
             {
               deltat4 = ((Now2 - lastUpdate4 + calTime2)/100000.0f); 
               Figupdate(gyro[0]*De2Ra,gyro[1]*De2Ra,gyro[2]*De2Ra,acc[0],acc[1],acc[2],mag[0],mag[1],mag[2],MPU_FIG3);
               lastUpdate4 = Clock_getTicks();
-              roll = atan2(2.0f * (qB[0] * qB[1] + qB[2] * qB[3]), qB[0] * qB[0] - qB[1] * qB[1] - qB[2] * qB[2] + qB[3] * qB[3]);
+              //roll = atan2(2.0f * (qB[0] * qB[1] + qB[2] * qB[3]), qB[0] * qB[0] - qB[1] * qB[1] - qB[2] * qB[2] + qB[3] * qB[3]);
             }
             else if(_Sel == MPU_FIG4)
             {
               deltat5 = ((Now2- lastUpdate5 + calTime2)/100000.0f);
               Figupdate(gyro[0]*De2Ra,gyro[1]*De2Ra,gyro[2]*De2Ra,acc[0],acc[1],acc[2],mag[0],mag[1],mag[2],MPU_FIG4);
               lastUpdate5 = Clock_getTicks();
-              roll = atan2(2.0f * (qC[0] * qC[1] + qC[2] * qC[3]), qC[0] * qC[0] - qC[1] * qC[1] - qC[2] * qC[2] + qC[3] * qC[3]);
+              yaw = atan2(2.0f * (qC[1] * qC[2] + qC[0] * qC[3]), qC[0] * qC[0] + qC[1] * qC[1] - qC[2] * qC[2] - qC[3] * qC[3]) + M_PI;
+              //roll = atan2(2.0f * (qC[0] * qC[1] + qC[2] * qC[3]), qC[0] * qC[0] - qC[1] * qC[1] - qC[2] * qC[2] + qC[3] * qC[3]);
             }
             else if(_Sel == MPU_FIG5)
             {
               deltat6 = ((Now2- lastUpdate6 + calTime2)/100000.0f);
               Figupdate(gyro[0]*De2Ra,gyro[1]*De2Ra,gyro[2]*De2Ra,acc[0],acc[1],acc[2],mag[0],mag[1],mag[2],MPU_FIG5);
               lastUpdate6 = Clock_getTicks();
-              roll = atan2(2.0f * (qD[0] * qD[1] + qD[2] * qD[3]), qD[0] * qD[0] - qD[1] * qD[1] - qD[2] * qD[2] + qD[3] * qD[3]);
-            }
+              //roll = atan2(2.0f * (qD[0] * qD[1] + qD[2] * qD[3]), qD[0] * qD[0] - qD[1] * qD[1] - qD[2] * qD[2] + qD[3] * qD[3]);
+            }*/
             //Finger Section2
-            if(_Sel==(MPU_FIG1|MPU9250_Serial_MASK))
+            /*if(_Sel==(MPU_FIG1|MPU9250_Serial_MASK))
             {
               deltat7 = ((Now2 - lastUpdate7 + calTime2)/100000.0f);
               Figupdate(gyro[0]*De2Ra,gyro[1]*De2Ra,gyro[2]*De2Ra,acc[0],acc[1],acc[2],mag[0],mag[1],mag[2],MPU_FIG1|MPU9250_Serial_MASK);
@@ -666,11 +668,11 @@ static void GetAngleDiff()
               Figupdate(gyro[0]*De2Ra,gyro[1]*De2Ra,gyro[2]*De2Ra,acc[0],acc[1],acc[2],mag[0],mag[1],mag[2],MPU_FIG3|MPU9250_Serial_MASK);
               lastUpdate9= Clock_getTicks();
               roll = atan2(2.0f * (qG[0] * qG[1] + qG[2] * qG[3]), qG[0] * qG[0] - qG[1] * qG[1] - qG[2] * qG[2] + qG[3] * qG[3]);
-            }*/
-            
-            roll = ATAN2(acc[1],acc[2]);// roll=ay/az
-            pitch = ATAN2(acc[0],acc[2]);// pitch=ax/az
-            
+            }*/            
+            roll = atan2(acc[1],acc[2]);// roll=ay/az
+            pitch = atan2(acc[0],acc[2]);// pitch=ax/az
+            /*if(yaw >M_PI)
+              yaw-= M_PI * 2;*/
             if(pitch>M_PI_2)
               pitch-=M_PI;
             else if(pitch<-M_PI_2)
@@ -684,17 +686,17 @@ static void GetAngleDiff()
             
             Hy = mag[0]*sin(roll)*sin(pitch) + mag[1]*cos(roll) + mag[2]*cos(pitch)*sin(roll);// Tilt compensation
             Hx = mag[0]*cos(pitch) + mag[2]*sin(pitch);
-            yaw = ATAN2(mag[1],mag[0]);
-            
+            yaw = atan2(Hy,Hx);
+
             roll*=Ra2De;
             pitch*=Ra2De;
             yaw*=Ra2De;
             
             roll_diff = roll - Roll; 
-            pitch_diff = pitch - Pitch;
+            pitch_diff = pitch + Pitch;
             yaw_diff = yaw - Yaw;
             
-            AngleG = yaw;           
+            AngleG = roll_diff*fabs(cos(pitch*De2Ra)) + pitch_diff*fabs(cos(roll*De2Ra)) + yaw_diff*fabs(sin(roll*De2Ra));
             /*if(_Sel == MPU_FIG5)
             {
               Dot[0] = acc[0]*CalAcc[0] + acc[2]*CalAcc[1];
@@ -996,30 +998,7 @@ static void GetAngleDiff()
       qG[3] = q3;
     }
 }*/
-float ATAN2(float y,float x)
-{
-  float angle=0;
-  
-  if(x==0)
-  {
-    if(y>0)
-      angle=M_PI_2;
-    else if(y<0)
-      angle=-M_PI_2;
-  }
-  else if(x<0)
-  {
-    if(y>=0)
-      angle=atan(y/x)+M_PI;
-    else if(y<0)
-      angle=atan(y/x)-M_PI;
-  }
-  else if(x>0)
-    angle=atan(y/x);
-  
-  return angle;
-}
-float Azimuth(float y,float x)
+/*float Azimuth(float y,float x)
 {
   float azimuth = 0.0f;
   
@@ -1041,4 +1020,4 @@ float Azimuth(float y,float x)
     azimuth = M_PI - atan(y/x);
   
   return azimuth;
-}
+}*/
