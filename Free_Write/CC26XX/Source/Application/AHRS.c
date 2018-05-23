@@ -619,7 +619,7 @@ void AHRS_Convert(int16_t *data, float *ahr)
   float avgaccsum;
   float GryLim;
   float MovementEng = 0.0f;
-  float Hy=0.0f,Hx=0.0f;
+  //float Hy=0.0f,Hx=0.0f;
   uint8_t i;
   uint32_t Now = Clock_getTicks();
   
@@ -680,23 +680,18 @@ void AHRS_Convert(int16_t *data, float *ahr)
 //  datas[5] = sensorAllMpu9250AccConvert(data[5]);
   
   //'ZYX' Convert
-  //ahr[0] = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) + M_PI;
-  ahr[1] =  asin(2.0f * (q[0] * q[2] - q[1] * q[3]));
-  ahr[2] = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]), q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);
+  ahr[0] = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) + M_PI;//Yaw
+  ahr[1] =  asin(2.0f * (q[0] * q[2] - q[1] * q[3]));//Pitch
+  ahr[2] = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]), q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);//Roll
   
   ahr[1] *= fabs(cos(ahr[2]));
   ahr[2] *= fabs(cos(ahr[1]));
   
-  Hy = datas[6]*sin(ahr[2])*sin(ahr[1]) + datas[7]*cos(ahr[2]) + datas[8]*cos(ahr[1])*sin(ahr[2]);// Tilt compensation
+  /*Hy = datas[6]*sin(ahr[2])*sin(ahr[1]) + datas[7]*cos(ahr[2]) + datas[8]*cos(ahr[1])*sin(ahr[2]);// Tilt compensation
   Hx = datas[6]*cos(ahr[1]) + datas[8]*sin(ahr[1]);
-  ahr[0] = atan2(Hy,Hx);
-  /*
-  ahr[0]:Yaw
-  ahr[1]:Pitch
-  ahr[2]:Roll
-  */
-  /*if(ahr[0] >M_PI)
-    ahr[0]-= M_PI * 2;*/
+  ahr[0] = atan2(Hy,Hx);*/
+  if(ahr[0] >M_PI)
+    ahr[0]-= M_PI * 2;
   ahr[0] *= Ra2De;
   ahr[1] *= Ra2De;
   ahr[2] *= Ra2De;
