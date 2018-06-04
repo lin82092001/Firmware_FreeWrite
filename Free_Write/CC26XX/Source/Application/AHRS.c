@@ -680,9 +680,12 @@ void AHRS_Convert(int16_t *data, float *ahr)
 //  datas[5] = sensorAllMpu9250AccConvert(data[5]);
   
   //'ZYX' Convert
-  ahr[0] = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) + M_PI;//Yaw
+  ahr[0] = atan2(2.0f * (q[1] * q[2] + q[0] * q[3]), q[0] * q[0] + q[1] * q[1] - q[2] * q[2] - q[3] * q[3]) + M_PI;//Yaw 
   ahr[1] =  asin(2.0f * (q[0] * q[2] - q[1] * q[3]));//Pitch
   ahr[2] = atan2(2.0f * (q[0] * q[1] + q[2] * q[3]), q[0] * q[0] - q[1] * q[1] - q[2] * q[2] + q[3] * q[3]);//Roll
+  //ahr[0] = atan2(datas[7],datas[6])+M_PI;
+  //ahr[1] = atan2(datas[3],datas[5]);
+  //ahr[2] = atan2(datas[4],datas[5]);
   
   ahr[1] *= fabs(cos(ahr[2]));
   ahr[2] *= fabs(cos(ahr[1]));
